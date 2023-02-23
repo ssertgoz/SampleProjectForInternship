@@ -2,7 +2,7 @@
 part of 'bluetooth_bloc.dart';
 
 enum BluetoothStatus {
-  searching,
+  scanning,
   connected,
   disconnected,
   retrievingData,
@@ -12,22 +12,23 @@ enum BluetoothStatus {
 class BluetoothState {
   BluetoothState({
     required this.status,
+    //required this.devices,
   });
-
   BluetoothStatus status;
+  //List<BluetoothDevice> devices;
 
-  factory BluetoothState.initial(
-      {questions, currentQuestionIndex, solvedOptionIDs, questionsStates}) {
+  factory BluetoothState.initial() {
     return BluetoothState(
-      status: BluetoothStatus.disconnected,
+      status: BluetoothStatus.disconnected, //devices: <BluetoothDevice>[]
     );
   }
 
-  BluetoothState copyWith({
-    BluetoothStatus? status,
-  }) {
+  BluetoothState copyWith(
+      {BluetoothStatus? status, //List<BluetoothDevice>?
+      devices}) {
     return BluetoothState(
       status: status ?? this.status,
+      //devices: devices ?? this.devices,
     );
   }
 }

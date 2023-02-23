@@ -1,10 +1,17 @@
 part of 'bluetooth_bloc.dart';
 
-@immutable
 abstract class BluetoothEvent {}
 
-class Connect extends BluetoothEvent {}
+class Scan extends BluetoothEvent {}
 
-class Disconnect extends BluetoothEvent {}
+class Connect extends BluetoothEvent {
+  // BluetoothDevice device;
+  // Connect({required this.device});
+}
+
+class Disconnect extends BluetoothEvent {
+  // BluetoothDevice device;
+  // Disconnect({required this.device});
+}
 
 class RetrieveData extends BluetoothEvent {}
