@@ -1,11 +1,13 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ResultPage extends StatelessWidget {
   CognitoUser user;
-  String message;
 
-  ResultPage({required this.user, required this.message});
+  ResultPage({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class ResultPage extends StatelessWidget {
         body: Center(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text("Hoşgeldin " + user.username.toString()),
+          Text("Hoşgeldin ${user.username}"),
         ])));
   }
 }

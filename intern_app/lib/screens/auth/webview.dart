@@ -1,5 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intern_app/data/aws_cognito.dart';
 import 'package:intern_app/screens/auth/result_screen.dart';
@@ -56,30 +57,21 @@ class _WebViewScreenState extends State<WebViewScreen> {
                   (request.url.startsWith("myapp:///?code=") ||
                       request.url.startsWith("myapp://?code="))) {
                 String code = "";
-                String message = "";
                 if (request.url.startsWith("myapp:///?code=")) {
-                  message = "Yeni giriş Yapıldı";
                   code = request.url.substring("myapp:///?code=".length);
                 } else {
-                  message = "Varolan Kullanıcı";
                   code = request.url.substring("myapp://?code=".length);
                 }
-
-                debugPrint(code);
-                debugPrint("Geldiiii...");
                 var result = await AWSServices().signUserInWithAuthCode(code);
                 if ((result != null)) {
                   signedin = true;
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => ResultPage(
                             user: result,
-                            message: message,
                           )));
                 } else {
-                  // ignore: prefer_const_constructors
                   setState(() {});
                 }
-                debugPrint("Başarılı...");
                 return NavigationDecision.prevent;
               }
               return NavigationDecision.navigate;

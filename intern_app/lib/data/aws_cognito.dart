@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class AWSServices {
   final userPool =
@@ -63,8 +62,6 @@ class AWSServices {
     bool result = await user.confirmRegistration(confirmationCode);
     return result;
   }
-
-  Future loginUser(email, password) async {}
 
   Future signUserInWithAuthCode(String authCode) async {
     try {

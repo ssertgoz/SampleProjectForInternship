@@ -2,6 +2,7 @@ import 'package:amazon_cognito_identity_dart_2/cognito.dart';
 import 'package:flutter/material.dart';
 import 'package:intern_app/data/aws_cognito.dart';
 
+// ignore: must_be_immutable
 class ConfirmationDialog extends StatelessWidget {
   final TextEditingController _textFieldController = TextEditingController();
   CognitoUser user;
@@ -10,25 +11,26 @@ class ConfirmationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Enter Text'),
+      title: const Text('Onay Kodu'),
       content: TextField(
         controller: _textFieldController,
-        decoration: InputDecoration(hintText: 'Enter text here'),
+        decoration: const InputDecoration(hintText: 'Kodu buraya giriniz'),
       ),
       actions: <Widget>[
         TextButton(
-          child: Text('CANCEL'),
+          child: const Text('Vazgeç'),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         TextButton(
-          child: Text('OK'),
+          child: const Text('Tamam'),
           onPressed: () async {
             // Do something with entered text
             String enteredText = _textFieldController.text;
             bool result = await AWSServices().confirmUser(enteredText, user);
             if (result) {
+              // ignore: use_build_context_synchronously
               Navigator.of(context).pop(result);
             } else {
               // ignore: use_build_context_synchronously

@@ -1,15 +1,18 @@
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:auth_buttons/auth_buttons.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intern_app/data/aws_cognito.dart';
 import 'package:intern_app/screens/auth/confirmation_dialog.dart';
 import 'package:intern_app/screens/auth/result_screen.dart';
 import 'package:intern_app/screens/auth/webview.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
+// ignore: must_be_immutable
 class SignupPage extends StatelessWidget {
   TextEditingController email_controller = TextEditingController();
   TextEditingController password_controller = TextEditingController();
+
+  SignupPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +66,6 @@ class SignupPage extends StatelessWidget {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => ResultPage(
                                   user: user,
-                                  message: "message",
                                 )));
                       }
                     }
@@ -80,7 +82,7 @@ class SignupPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: 40),
-              Container(
+              SizedBox(
                 width: 300,
                 child: GoogleAuthButton(
                   onPressed: () {
@@ -93,7 +95,7 @@ class SignupPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16),
-              Container(
+              SizedBox(
                 width: 300,
                 child: FacebookAuthButton(
                   onPressed: () {

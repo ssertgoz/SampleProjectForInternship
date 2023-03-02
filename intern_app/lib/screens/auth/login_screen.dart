@@ -1,30 +1,32 @@
-import 'package:amazon_cognito_identity_dart_2/cognito.dart';
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:auth_buttons/auth_buttons.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intern_app/data/aws_cognito.dart';
 import 'package:intern_app/screens/auth/result_screen.dart';
 import 'package:intern_app/screens/auth/webview.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
   TextEditingController email_controller = TextEditingController();
   TextEditingController password_controller = TextEditingController();
+
+  LoginPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Giriş Yap'),
+        title: const Text('Giriş Yap'),
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 60),
-              FlutterLogo(size: 100),
-              SizedBox(height: 40),
+              const SizedBox(height: 60),
+              const FlutterLogo(size: 100),
+              const SizedBox(height: 40),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: _buildTextField(
                   controller: email_controller,
                   label: 'Email',
@@ -32,9 +34,9 @@ class LoginPage extends StatelessWidget {
                   obscureText: false,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: _buildTextField(
                   controller: password_controller,
                   label: 'Password',
@@ -42,7 +44,7 @@ class LoginPage extends StatelessWidget {
                   obscureText: true,
                 ),
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               SizedBox(
                 height: 50,
                 width: 300,
@@ -51,11 +53,9 @@ class LoginPage extends StatelessWidget {
                     var user = await AWSServices().creatInitialRecord(
                         email_controller.text, password_controller.text, false);
                     if (user != null) {
-                      // ignore: use_build_context_synchronously
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => ResultPage(
                                 user: user,
-                                message: "message",
                               )));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -82,25 +82,22 @@ class LoginPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
               SizedBox(height: 40),
-              Container(
+              SizedBox(
                 width: 300,
                 child: GoogleAuthButton(
                   onPressed: () async {
-                    // Google girişi işlemleri burada yapılacak
-                    await deneme();
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //     builder: (context) => WebViewScreen(
-                    //           identityProvider: "Google",
-                    //         )));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => WebViewScreen(
+                              identityProvider: "Google",
+                            )));
                   },
                 ),
               ),
               SizedBox(height: 16),
-              Container(
+              SizedBox(
                 width: 300,
                 child: FacebookAuthButton(
                   onPressed: () {
-                    // Facebook girişi işlemleri burada yapılacak
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => WebViewScreen(
                               identityProvider: "Facebook",
@@ -150,23 +147,5 @@ class LoginPage extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  deneme() async {
-    GoogleSignIn _googleSignIn = GoogleSignIn(
-      scopes: [
-        'email',
-        'https://www.googleapis.com/auth/contacts.readonly',
-      ],
-    );
-    String? _authCode;
-    try {
-      GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
-
-      _authCode = googleUser.serverAuthCode;
-    } catch (error) {
-      print(error);
-    }
   }
 }

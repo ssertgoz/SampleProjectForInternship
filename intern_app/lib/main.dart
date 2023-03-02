@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:intern_app/screens/bluetooth_connection/bluetooth_screen.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intern_app/screens/entry/entry_screen.dart';
-
-import 'screens/auth/signup_screen.dart';
 
 void showLayoutGuidelines() {
   debugPaintSizeEnabled = false;
@@ -27,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: EntryScreen(),
+      home: const EntryScreen(),
     );
   }
 }
